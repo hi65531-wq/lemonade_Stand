@@ -16,7 +16,7 @@ public class LemonStand {
         lemons = 0;
         sugar = 0;
         pitchers = 0;
-        cupPrice = 0;
+        cupPrice = 100;
     }
 
     //returining values 
