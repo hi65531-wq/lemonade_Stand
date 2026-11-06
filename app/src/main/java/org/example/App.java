@@ -16,6 +16,17 @@ public class App {
 
         //game loop for each day
         while (playing) {
+
+            //charge rent
+            stand.payRent();
+            System.out.println("Daily rent paid: " + formatMoney(LemonStand.DAILY_RENT));
+
+            //whether the player is bankrupt
+            if (stand.getNetWorth() < 0) {
+                System.out.println("Game over! You made it to day " + day + " before going bankrupt!");
+                break;
+            }
+
             System.out.println("Day " + day + ": Preparation Phase");
 
             boolean preparing = true;
@@ -111,7 +122,7 @@ public class App {
 
         System.out.println("Lemons: " + stand.getLemons());
         System.out.println("Sugar (Cups): " + stand.getSugar());
-        System.out.println("Water (Cups): Infinity");
+        System.out.println("Water (Cups): Infinite");
         System.out.println("Current Pitchers: " + stand.getPitchers());
         System.out.println("Cash: " + formatMoney(stand.getCash()));
 
