@@ -4,6 +4,7 @@ package org.example;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 
 public class LemonStandTest {
 
@@ -100,5 +101,46 @@ public class LemonStandTest {
 
         assertEquals(8, sold);
         assertEquals(0, stand.getPitchers());
+    }
+
+
+    @Test
+    public void testStartingNetWorth() {
+        LemonStand stand = new LemonStand();
+
+        assertEquals(10000L, stand.getNetWorth());
+    }
+
+
+    @Test
+    public void testDailyRent() {
+        LemonStand stand = new LemonStand();
+         stand.payRent();
+
+        assertEquals(9000, stand.getCash());
+    }
+
+
+    @Test
+    public void testZeroNetWorth() {
+        LemonStand stand = new LemonStand();
+        for (int i = 0; i < 10; i++) {
+            stand.payRent();
+        }
+
+        assertEquals(0L, stand.getNetWorth());
+        assertTrue(stand.getNetWorth() >= 0);
+    }
+
+
+    @Test
+    public void testBankruptcy() {
+        LemonStand stand = new LemonStand();
+        for (int i = 0; i < 11; i++) {
+            stand.payRent();
+        }
+
+        assertEquals(-1000L, stand.getNetWorth());
+        assertTrue(stand.getNetWorth() < 0);
     }
 }
