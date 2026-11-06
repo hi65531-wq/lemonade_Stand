@@ -19,6 +19,9 @@ public class LemonStand {
         cupPrice = 100;
     }
 
+    // Fixed daily rent in cents ($10.00)
+    public static final int DAILY_RENT = 1000;
+
     //returining values 
     public Recipe getRecipe() {
         return recipe;
@@ -145,5 +148,15 @@ public class LemonStand {
         pitchers = 0;
 
         return cupsSold;
+    }
+
+    //calculating the player's net worth in cents
+    public long getNetWorth() {
+        return cash + (long) lemons * 100 + (long) sugar * 50;
+    }
+
+    //charging rent
+    public void payRent() {
+        cash -= DAILY_RENT;
     }
 }
