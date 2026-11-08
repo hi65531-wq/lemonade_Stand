@@ -19,8 +19,11 @@ public class LemonStand {
         cupPrice = 100;
     }
 
-    // Fixed daily rent in cents ($10.00)
+    //fixed daily rent in cents
     public static final int DAILY_RENT = 1000;
+
+    //max lemonade price in cents
+    public static final int MAX_CUP_PRICE = 1000;
 
     //returining values 
     public Recipe getRecipe() {
@@ -133,7 +136,29 @@ public class LemonStand {
         }
 
         long availableCups = (long) pitchers * 8;
-        int cupsSold = (int) Math.min(availableCups, customers);
+        
+        //free lemonade always sells out
+        if (cupPrice == 0) {
+            int cupsSold = (int) Math.min(availableCups, Integer.MAX_VALUE);
+            pitchers = 0;
+            return cupsSold;
+        }
+
+        //nobody buys lemonade at or above the maximum price
+        if (cupPrice >= MAX_CUP_PRICE) {
+            pitchers = 0;
+            return 0;
+        }
+
+        //calculating the supply and demand
+        double multiplier = 1.0 - ((double) cupPrice / MAX_CUP_PRICE);
+
+        // Adjust customers based on the price
+        long adjustedCustomers = Math.round(customers * multiplier);
+
+        // Cannot sell more cups than are available
+        int cupsSold = (int) Math.min(availableCups, adjustedCustomers);
+
 
         long earnings = (long) cupsSold * cupPrice;
 
