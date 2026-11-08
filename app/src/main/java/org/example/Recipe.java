@@ -5,21 +5,38 @@ public class Recipe {
     //ingredients
     private int lemons;
     private int sugar;
-    private int water;
+    private double water;
 
     public Recipe() {
         lemons = 0;
         sugar = 0;
-        water = 0;
+        water = 8.0;
     }
 
     //setting recipe
-    public void setRecipe(int lemons, int sugar, int water) {
-        if (lemons >= 0 && sugar >= 0 && water >= 0) {
-            this.lemons = lemons;
-            this.sugar = sugar;
-            this.water = water;
+    public boolean setRecipe(int lemons, int sugar, double water) {
+        
+        //no negatives 
+        if (lemons < 0 || sugar < 0 || water < 0) {
+            return false;
         }
+
+        //calculating the total volume
+        double totalVolume = lemons * 0.25 + sugar * 0.5 + water;
+
+        //rejects recipes larger than 8 cups
+        if (totalVolume > 8.0) {
+            return false;
+        }
+
+        //fills the remaining space with water
+        double extraWater = 8.0 - totalVolume;
+
+        this.lemons = lemons;
+        this.sugar = sugar;
+        this.water = water + extraWater;
+
+        return true;
     }
 
     //returning values
@@ -31,7 +48,7 @@ public class Recipe {
         return sugar;
     }
 
-    public int getWater() {
+    public double getWater() {
         return water;
     }
 }
