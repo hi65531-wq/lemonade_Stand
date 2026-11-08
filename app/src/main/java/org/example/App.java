@@ -161,14 +161,15 @@ public class App {
         int sugar = getNonNegativeInt(input,"How many cups of sugar per pitcher? ");
         int water = getNonNegativeInt(input,"How many cups of water per pitcher? ");
 
-        //preventing a recipe with no ingredients
-        if (lemons == 0 && sugar == 0 && water == 0) {
-            System.out.println("Your recipe must contain " + "at least one ingredient.");
-        } 
-        else {
-            //updates the recipe
-            stand.getRecipe().setRecipe(lemons, sugar, water);
+        //update the recipe
+        if (stand.getRecipe().setRecipe(lemons, sugar, water)) {
             System.out.println("Great! Your recipe is set!");
+
+            //display the final water amount
+            System.out.println("Water after filling the pitcher: " + stand.getRecipe().getWater() + " cups.");
+        }
+        else {
+            System.out.println("Invalid recipe! The total volume " + "cannot exceed 8 cups.");
         }
     }
 
