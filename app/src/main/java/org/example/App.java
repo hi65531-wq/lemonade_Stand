@@ -73,6 +73,23 @@ public class App {
             long availableCups = (long) stand.getPitchers() * 8;
             int sold = stand.sellLemonade(customers);
 
+            //explaining how the price affected lemonade sales
+            if (availableCups == 0) {
+                System.out.println("You had no available lemonade to sell.");
+            }
+            else if (stand.getCupPrice() == 0) {
+                System.out.println("Free lemonade! All available cups were sold!");
+            } 
+            else if (stand.getCupPrice() >= LemonStand.MAX_CUP_PRICE) {
+                System.out.println("Your lemonade was too expensive!");
+                System.out.println("Nobody wanted to buy it.");
+            } 
+            else {
+                double multiplier = 1.0 - ((double) stand.getCupPrice() / LemonStand.MAX_CUP_PRICE);
+                System.out.println("Your price affected customer demand.");
+                System.out.println("Demand multiplier: " + multiplier);
+            }
+
             // calcs how many cups were not sold
             long leftover = availableCups - sold;
 
