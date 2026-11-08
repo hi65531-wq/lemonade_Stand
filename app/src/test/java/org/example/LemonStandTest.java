@@ -1,9 +1,7 @@
-
 package org.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Test;
 
 public class LemonStandTest {
@@ -46,22 +44,24 @@ public class LemonStandTest {
     @Test
     void testMakePitchers() {
         stand.buyIngredients(20, 10);
-        stand.getRecipe().setRecipe(5, 2, 6);
+        stand.getRecipe().setRecipe(4, 2, 5);
 
         assertTrue(stand.makePitchers(3));
 
         assertEquals(3, stand.getPitchers());
-        assertEquals(5, stand.getLemons());
+        assertEquals(8, stand.getLemons());
         assertEquals(4, stand.getSugar());
     }
 
     @Test
     void testNotEnoughIngredients() {
         stand.buyIngredients(5, 2);
-        stand.getRecipe().setRecipe(5, 2, 6);
+        stand.getRecipe().setRecipe(4, 2, 5);
 
         assertFalse(stand.makePitchers(3));
         assertEquals(0, stand.getPitchers());
+        assertEquals(5, stand.getLemons());
+        assertEquals(2, stand.getSugar());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class LemonStandTest {
     @Test
     void testSellLemonade() {
         stand.buyIngredients(10, 4);
-        stand.getRecipe().setRecipe(5, 2, 6);
+        stand.getRecipe().setRecipe(4, 2, 5);
         stand.makePitchers(2);
 
         stand.setPrice(100);
@@ -94,7 +94,7 @@ public class LemonStandTest {
     @Test
     void testSellOut() {
         stand.buyIngredients(5, 2);
-        stand.getRecipe().setRecipe(5, 2, 6);
+        stand.getRecipe().setRecipe(4, 2, 5);
         stand.makePitchers(1);
 
         int sold = stand.sellLemonade(50);
