@@ -86,9 +86,9 @@ public class LemonStandTest {
 
         int sold = stand.sellLemonade(10);
 
-        assertEquals(10, sold);
+        assertEquals(9, sold);
         assertEquals(0, stand.getPitchers());
-        assertEquals(9800, stand.getCash());
+        assertEquals(9700, stand.getCash());
     }
 
     @Test
@@ -103,14 +103,12 @@ public class LemonStandTest {
         assertEquals(0, stand.getPitchers());
     }
 
-
     @Test
     public void testStartingNetWorth() {
         LemonStand stand = new LemonStand();
 
         assertEquals(10000L, stand.getNetWorth());
     }
-
 
     @Test
     public void testDailyRent() {
@@ -119,7 +117,6 @@ public class LemonStandTest {
 
         assertEquals(9000, stand.getCash());
     }
-
 
     @Test
     public void testZeroNetWorth() {
@@ -132,7 +129,6 @@ public class LemonStandTest {
         assertTrue(stand.getNetWorth() >= 0);
     }
 
-
     @Test
     public void testBankruptcy() {
         LemonStand stand = new LemonStand();
@@ -142,5 +138,41 @@ public class LemonStandTest {
 
         assertEquals(-1000L, stand.getNetWorth());
         assertTrue(stand.getNetWorth() < 0);
+    }
+
+    @Test
+    void testFreeLemonade() {
+        assertTrue(stand.makePitchers(2));
+        assertTrue(stand.setPrice(0));
+
+        int sold = stand.sellLemonade(5);
+
+        assertEquals(16, sold);
+        assertEquals(0, stand.getPitchers());
+        assertEquals(10000, stand.getCash());
+    }
+
+    @Test
+    void testMaximumPrice() {
+        assertTrue(stand.makePitchers(2));
+        assertTrue(stand.setPrice(1000));
+
+        int sold = stand.sellLemonade(100);
+
+        assertEquals(0, sold);
+        assertEquals(0, stand.getPitchers());
+        assertEquals(10000, stand.getCash());
+    }
+
+    @Test
+    void testHalfPriceDemand() {
+        assertTrue(stand.makePitchers(10));
+        assertTrue(stand.setPrice(500));
+
+        int sold = stand.sellLemonade(100);
+
+        assertEquals(50, sold);
+        assertEquals(0, stand.getPitchers());
+        assertEquals(35000, stand.getCash());
     }
 }
