@@ -87,7 +87,7 @@ public class LemonStand {
 
         int lemonsNeeded = recipe.getLemons();
         int sugarNeeded = recipe.getSugar();
-        int waterNeeded = recipe.getWater();
+        double waterNeeded = recipe.getWater();
 
         //checking to see if there is enough ingredients to make the lemonade
         if (lemonsNeeded == 0 && sugarNeeded == 0
