@@ -87,7 +87,7 @@ public class App {
             else {
                 double multiplier = 1.0 - ((double) stand.getCupPrice() / LemonStand.MAX_CUP_PRICE);
                 System.out.println("Your price affected customer demand.");
-                System.out.println("Demand multiplier: " + multiplier);
+                System.out.printf("Demand multiplier: %.2f%n", multiplier);
             }
 
             // calcs how many cups were not sold
